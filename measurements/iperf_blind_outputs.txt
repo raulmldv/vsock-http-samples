@@ -1,0 +1,106 @@
+Commands
+
+Enclave server: iperf3 -s -1 -p 5001
+Parent client: ./iperf3 --vsock -c 16 -t 10 -p 5001
+
+
+Without TCP_CONGESTION
+
+Client
+
+Connecting to host 16, port 5001
+[  5] local 3 port 2545636211 connected to 16 port 5001
+[ ID] Interval           Transfer     Bitrate
+[  5]   0.00-1.00   sec   702 MBytes  5.89 Gbits/sec                  
+[  5]   1.00-2.00   sec   760 MBytes  6.38 Gbits/sec                  
+[  5]   2.00-3.00   sec   716 MBytes  6.01 Gbits/sec                  
+[  5]   3.00-4.00   sec   713 MBytes  5.98 Gbits/sec                  
+[  5]   4.00-5.00   sec   745 MBytes  6.25 Gbits/sec                  
+[  5]   5.00-6.00   sec   711 MBytes  5.97 Gbits/sec                  
+[  5]   6.00-7.00   sec   732 MBytes  6.14 Gbits/sec                  
+[  5]   7.00-8.00   sec   734 MBytes  6.16 Gbits/sec                  
+[  5]   8.00-9.00   sec   726 MBytes  6.09 Gbits/sec                  
+[  5]   9.00-10.00  sec   740 MBytes  6.21 Gbits/sec                  
+- - - - - - - - - - - - - - - - - - - - - - - - -
+[ ID] Interval           Transfer     Bitrate
+[  5]   0.00-10.00  sec  7.11 GBytes  6.11 Gbits/sec                  sender
+[  5]   0.00-10.00  sec  7.11 GBytes  6.11 Gbits/sec                  receiver
+
+iperf Done.
+
+
+Server
+
+-----------------------------------------------------------
+Server listening on 5001
+-----------------------------------------------------------
+Accepted connection from 0.0.0.0, port 49576
+[ 13] local 0.0.0.0 port 8000 connected to 0.0.0.0 port 49576
+[ ID] Interval           Transfer     Bitrate
+[ 13]   0.00-1.00   sec   702 MBytes  5.89 Gbits/sec                  
+[ 13]   1.00-2.00   sec   760 MBytes  6.38 Gbits/sec                  
+[ 13]   2.00-3.00   sec   716 MBytes  6.01 Gbits/sec                  
+[ 13]   3.00-4.00   sec   713 MBytes  5.98 Gbits/sec                  
+[ 13]   4.00-5.00   sec   745 MBytes  6.25 Gbits/sec                  
+[ 13]   5.00-6.00   sec   711 MBytes  5.97 Gbits/sec                  
+[ 13]   6.00-7.00   sec   732 MBytes  6.14 Gbits/sec                  
+[ 13]   7.00-8.00   sec   734 MBytes  6.16 Gbits/sec                  
+[ 13]   8.00-9.00   sec   726 MBytes  6.09 Gbits/sec                  
+[ 13]   9.00-10.00  sec   740 MBytes  6.21 Gbits/sec                  
+[ 13]  10.00-10.00  sec   128 KBytes  1.77 Gbits/sec                  
+- - - - - - - - - - - - - - - - - - - - - - - - -
+[ ID] Interval           Transfer     Bitrate
+[ 13]   0.00-10.00  sec  7.11 GBytes  6.11 Gbits/sec                  receiver
+
+
+***************************************************************************
+
+
+With TCP_CONGESTION
+
+Client
+
+Connecting to host 16, port 5001
+[  5] local 3 port 2545636234 connected to 16 port 5001
+[ ID] Interval           Transfer     Bitrate
+[  5]   0.00-1.00   sec   737 MBytes  6.19 Gbits/sec                  
+[  5]   1.00-2.00   sec   731 MBytes  6.13 Gbits/sec                  
+[  5]   2.00-3.00   sec   747 MBytes  6.27 Gbits/sec                  
+[  5]   3.00-4.00   sec   771 MBytes  6.47 Gbits/sec                  
+[  5]   4.00-5.00   sec   737 MBytes  6.18 Gbits/sec                  
+[  5]   5.00-6.00   sec   751 MBytes  6.30 Gbits/sec                  
+[  5]   6.00-7.00   sec   738 MBytes  6.19 Gbits/sec                  
+[  5]   7.00-8.00   sec   737 MBytes  6.18 Gbits/sec                  
+[  5]   8.00-9.00   sec   754 MBytes  6.32 Gbits/sec                  
+[  5]   9.00-10.00  sec   722 MBytes  6.05 Gbits/sec                  
+- - - - - - - - - - - - - - - - - - - - - - - - -
+[ ID] Interval           Transfer     Bitrate
+[  5]   0.00-10.00  sec  7.25 GBytes  6.23 Gbits/sec                  sender
+[  5]   0.00-10.00  sec  7.25 GBytes  6.23 Gbits/sec                  receiver
+
+iperf Done.
+
+
+
+Server
+
+-----------------------------------------------------------
+Server listening on 5001
+-----------------------------------------------------------
+Accepted connection from 0.0.0.0, port 49576
+[ 14] local 0.0.0.0 port 8000 connected to 0.0.0.0 port 49576
+[ ID] Interval           Transfer     Bitrate
+[ 14]   0.00-1.00   sec   737 MBytes  6.18 Gbits/sec                  
+[ 14]   1.00-2.00   sec   730 MBytes  6.13 Gbits/sec                  
+[ 14]   2.00-3.00   sec   747 MBytes  6.27 Gbits/sec                  
+[ 14]   3.00-4.00   sec   771 MBytes  6.47 Gbits/sec                  
+[ 14]   4.00-5.00   sec   737 MBytes  6.19 Gbits/sec                  
+[ 14]   5.00-6.00   sec   751 MBytes  6.30 Gbits/sec                  
+[ 14]   6.00-7.00   sec   737 MBytes  6.19 Gbits/sec                  
+[ 14]   7.00-8.00   sec   737 MBytes  6.19 Gbits/sec                  
+[ 14]   8.00-9.00   sec   754 MBytes  6.32 Gbits/sec                  
+[ 14]   9.00-10.00  sec   721 MBytes  6.05 Gbits/sec                  
+[ 14]  10.00-10.00  sec   256 KBytes  3.47 Gbits/sec                  
+- - - - - - - - - - - - - - - - - - - - - - - - -
+[ ID] Interval           Transfer     Bitrate
+[ 14]   0.00-10.00  sec  7.25 GBytes  6.23 Gbits/sec                  receiver

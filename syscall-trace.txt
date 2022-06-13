@@ -1,0 +1,36 @@
+// Listen AF_INET
+
+socket(AF_INET, SOCK_STREAM|SOCK_CLOEXEC, IPPROTO_IP) = 3
+setsockopt(3, SOL_SOCKET, SO_REUSEADDR, [1], 4) = 0
+bind(3, {sa_family=AF_INET, sin_port=htons(5001), sin_addr=inet_addr("127.0.0.1")}, 16) = 0
+listen(3, 128)                          = 0
+accept4(3, {sa_family=AF_INET, sin_port=htons(58088), sin_addr=inet_addr("127.0.0.1")}, [128->16], SOCK_CLOEXEC) = 4
+recvfrom(4, "Hello from Client!\r\n", 8192, 0, NULL, NULL) = 20
+
+
+// Listen AF_VSOCK
+socket(AF_VSOCK, SOCK_STREAM|SOCK_CLOEXEC, 0) = 3
+bind(3, {sa_family=AF_VSOCK, sa_data="\0\0\211\23\0\0\377\377\377\377\0\0\0\0"}, 16) = 0
+listen(3, 128)                          = 0
+accept4(3, {sa_family=AF_VSOCK, sa_data="\0\0\350\260\331\1\20\0\0\0\1\0\0\0"}, [16], SOCK_CLOEXEC) = 4
+
+socket(AF_VSOCK, SOCK_STREAM, 0)        = 3
+bind(3, {sa_family=AF_VSOCK, sa_data="\0\0\215\23\0\0\377\377\377\377\0\0\0\0"}, 16) = 0
+listen(3, 128)                          = 0
+accept(3, NULL, NULL)                   = 4
+recvfrom(4, "\r\0\0\0\0\0\0\0", 8, 0, NULL, NULL) = 8
+recvfrom(4, "Hello, world!", 13, 0, NULL, NULL) = 13
+
+
+
+// Connect AF_INET
+socket(AF_INET, SOCK_STREAM|SOCK_CLOEXEC, IPPROTO_IP) = 3
+connect(3, {sa_family=AF_INET, sin_port=htons(3307), sin_addr=inet_addr("0.0.0.0")}, 16) = 0
+sendto(3, "Hello from Client!\r\n", 20, MSG_NOSIGNAL, NULL, 0) = 20
+
+
+// Connect AF_VSOCK
+socket(AF_VSOCK, SOCK_STREAM, 0)        = 3
+connect(3, {sa_family=AF_VSOCK, sa_data="\0\0\215\23\0\0\20\0\0\0\0\0\0\0"}, 16) = 0
+sendto(3, "\r\0\0\0\0\0\0\0", 8, 0, NULL, 0) = 8
+sendto(3, "Hello, world!", 13, 0, NULL, 0) = 13
